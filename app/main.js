@@ -12,8 +12,8 @@ app.on('ready', function() {
   appWindow.loadURL('file://' + __dirname + '/index.html');
 
   infoWindow = new BrowserWindow({
-    width: 400,
-    height: 300,
+    width: 800,
+    height: 600,
     transparent: true,
     show: false,
     frame: false
