@@ -7,7 +7,7 @@
 }
 
 .login-container {
-    padding-top: 60px;
+    padding-top: 15%;
 }
 
 .form-signin-heading {
@@ -41,4 +41,15 @@
   padding: 0;
   overflow: hidden;
   border: 0;
+}
+
+.login-box {
+    margin: 0 23%;
+    border: 1px solid #d4d4d4;
+    border-top: 6px solid #3ac2a6;
+}
+
+.btn-success {
+    background-color: #3ac2a6;
+    border-color: #3ac2a6;
 }
