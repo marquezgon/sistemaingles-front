@@ -1,8 +1,10 @@
 var $ = jQuery = require('jquery');
 var React = require('React');
 var LoadingSpinnerComponent = require('./LoadingSpinnerComponent');
+var Router = require('react-router');
+var withRouter = Router.withRouter;
 
-class LoginView extends React.Component {
+class LoginComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {isLogging: false};
@@ -22,7 +24,8 @@ class LoginView extends React.Component {
       url: "http://localhost:8000/users/login",
       data: formData,
       success: function(data) {
-        localStorage.setItem('sistema-ingles-token', data.token);
+        localStorage.mexEngToken = data.token;
+        this.props.router.replace('/');
       }.bind(this),
       complete: function() {
         this.setState({isLogging: false});
@@ -44,6 +47,7 @@ class LoginView extends React.Component {
                   <label htmlFor="inputPassword" className="sr-only">Contraseña</label>
                   <input type="password" id="inputPassword" name="password" className="form-control" placeholder="Contraseña" required />
                   <input id="inputButton" disabled={this.state.isLogging} type="submit" className="btn btn-success col-xs-offset-6 col-xs-6" value="Iniciar Sesión" />
+                  <Router.Link to="/counter">to Counter</Router.Link>
                   {this.state.errMsg ? <span className="text-danger">{this.state.errMsg}</span> : null }
                   &nbsp;<hr />
               </form>
@@ -54,4 +58,4 @@ class LoginView extends React.Component {
   }
 }
 
-module.exports = LoginView;
+module.exports = withRouter(LoginComponent);

@@ -1,19 +1,38 @@
 var $ = jQuery = require('jquery');
 var bootstrap = require('bootstrap');
-var fs = eRequire('fs');
 
 var React = require('react');
 var ReactDOM = require('react-dom');
-var LoginView = require('./LoginView');
-var LoadingSpinnerComponent = require('./LoadingSpinnerComponent');
+var ReactRouter = require('react-router');
+var AppContainer = require('./AppContainer');
+var Whoops404 = require('./Whoops404');
+var auth = require('./auth');
 
-var MainInterface = React.createClass({
-  render: function() {
+function requireAuth(nextState, replace) {
+  if (!auth.loggedIn()) {
+    replace({
+      pathname: '/login',
+      state: { nextPathname: nextState.location.pathname }
+    })
+  }
+}
+
+class MainInterface extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {isLoggedIn: auth.loggedIn()};
+  }
+
+  render() {
     return (
-        <LoginView />
-    )
-  }//render
-}); //MainInterface
+        <ReactRouter.Router history={ReactRouter.hashHistory}>
+          <ReactRouter.Route path="/" component={AppContainer} onEnter={requireAuth} />
+          <ReactRouter.Route path="/login" component={AppContainer} />
+          <ReactRouter.Route path="/*" component={Whoops404} />
+        </ReactRouter.Router>
+    );
+  }
+}
 
 ReactDOM.render(
   <MainInterface />,
