@@ -6,17 +6,21 @@ var ipc = electron.ipcMain;
 app.on('ready', function() {
   var appWindow, infoWindow;
   appWindow = new BrowserWindow({
-    show: false
+    show: false,
+    minWidth: 1024,
+    minHeight: 768,
+    width: 1024,
+    height: 768
   }); //appWindow
 
   appWindow.loadURL('file://' + __dirname + '/index.html');
 
   infoWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
     transparent: true,
     show: false,
-    frame: false
+    frame: false,
+    minWidth:1200,
+    minHeight:1000
   }); //infoWindow
 
   infoWindow.loadURL('file://' + __dirname + '/info.html');

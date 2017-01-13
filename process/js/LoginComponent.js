@@ -25,13 +25,15 @@ class LoginComponent extends React.Component {
       data: formData,
       success: function(data) {
         localStorage.mexEngToken = data.token;
-        this.props.router.replace('/');
+        this.props.router.replace('/')
       }.bind(this),
       complete: function() {
         this.setState({isLogging: false});
       }.bind(this),
       error: function(jqXHR, textStatus, errorThrown) {
-        this.setState({errMsg: jqXHR.responseJSON.message});
+        if(jqXHR.responseJSON.message) {
+          this.setState({errMsg: jqXHR.responseJSON.message});
+        }
       }.bind(this)
     });
   }
@@ -47,7 +49,6 @@ class LoginComponent extends React.Component {
                   <label htmlFor="inputPassword" className="sr-only">Contraseña</label>
                   <input type="password" id="inputPassword" name="password" className="form-control" placeholder="Contraseña" required />
                   <input id="inputButton" disabled={this.state.isLogging} type="submit" className="btn btn-success col-xs-offset-6 col-xs-6" value="Iniciar Sesión" />
-                  <Router.Link to="/counter">to Counter</Router.Link>
                   {this.state.errMsg ? <span className="text-danger">{this.state.errMsg}</span> : null }
                   &nbsp;<hr />
               </form>
