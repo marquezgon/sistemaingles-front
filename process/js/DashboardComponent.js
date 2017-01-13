@@ -1,6 +1,7 @@
 var React = require('React');
 var HeaderComponent = require('./HeaderComponent');
 var LeftSidebarComponent = require('./LeftSidebarComponent');
+var QuizSelectorComponent = require('./QuizSelectorComponent');
 
 class DashboardComponent extends React.Component {
 
@@ -10,6 +11,7 @@ class DashboardComponent extends React.Component {
       <HeaderComponent />
       <div id="wrapper">
         <LeftSidebarComponent />
+        <QuizSelectorComponent />
         {/* <div id="sidebar-wrapper-right">
           <ul className="sidebar-nav">
             <li className="sidebar-brand">
