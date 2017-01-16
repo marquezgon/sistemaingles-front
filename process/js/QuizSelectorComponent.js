@@ -17,6 +17,10 @@ class QuizSelectorComponent extends React.Component {
       padding: '0 4px',
       color: '#ccc'
     }
+    console.log(this.props.quizes);
+    const quizItems = this.props.quizes.map((quiz, index) => {
+        return <QuizList quiz={quiz} key={index} />
+    });
 
     return (
       <div id="quiz-wrapper">
@@ -25,7 +29,7 @@ class QuizSelectorComponent extends React.Component {
             <SearchSidebarComponent />
           </div>
           <ul className="sidebar-nav">
-            <QuizList  />
+              {quizItems}
           </ul>
       </div>
     )

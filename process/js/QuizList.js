@@ -1,5 +1,6 @@
 var React = require('React');
 var Link = require('react-router').Link;
+var TimeAgo = require('react-timeago').default
 
 class QuizList extends React.Component {
   render() {
@@ -15,7 +16,7 @@ class QuizList extends React.Component {
               <img src="img/quiz.png" width="60" height="60" />
             </div>
             <div className="col-md-8 quiz-col-8">
-              amigo
+                <TimeAgo date={this.props.quiz.created} />
             </div>
           </div>
         </a>

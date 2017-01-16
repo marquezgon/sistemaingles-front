@@ -21,7 +21,7 @@ class LoginComponent extends React.Component {
 
     $.ajax({
       type: 'POST',
-      url: "http://localhost:8000/users/login",
+      url: "http://localhost:8000/student/login",
       data: formData,
       success: function(data) {
         localStorage.mexEngToken = data.token;
