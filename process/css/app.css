@@ -435,7 +435,7 @@ input[type=search]:focus {
 }
 
 .quiz-col-8 {
-  padding-left: 3px;
+  padding-left: 5px;
   padding-right: 5px;
 }
 
@@ -454,6 +454,41 @@ div.quiz-col:hover {
   color: #666666;
 }
 
+.quiz-name-header {
+    font-size: 18px;
+    margin-top: 7px;
+    margin-bottom: 0px;
+    color: #666666;
+}
+
+.quiz-name-sub {
+    font-size: 12px;
+    margin-bottom: 0px;
+    color: #666666 !important;
+    line-height: 28px;
+}
+
 /************************/
 /** END SEARCH SIDEBAR **/
 /************************/
+
+a.hover-change-color:hover {
+    color: #3AC2A6 !important;
+}
+
+.new-quiz-modal-dialog, .new-quiz-modal-content {
+    height: 100%;
+}
+
+.new-quiz-modal-dialog {
+    width: 100%;
+}
+
+.quiz-container {
+    padding-left: 250px;
+}
+
+.quiz-subcontainer {
+    margin: 0 15px;
+    padding-top: 20px;
+}

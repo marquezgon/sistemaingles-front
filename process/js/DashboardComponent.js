@@ -3,6 +3,8 @@ var React = require('React');
 var HeaderComponent = require('./HeaderComponent');
 var LeftSidebarComponent = require('./LeftSidebarComponent');
 var QuizSelectorComponent = require('./QuizSelectorComponent');
+var NewQuizModal = require('./NewQuizModal');
+var MainQuizContainer = require('./MainQuizContainer');
 
 class DashboardComponent extends React.Component {
     constructor(props) {
@@ -46,7 +48,9 @@ class DashboardComponent extends React.Component {
             </li>
           </ul>
         </div> */}
+        <MainQuizContainer quiz={this.state.quizes[0]} />
       </div>
+      <NewQuizModal />
     </div>
     );
     }
