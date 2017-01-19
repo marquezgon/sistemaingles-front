@@ -53,7 +53,7 @@ class LoginComponent extends React.Component {
                   &nbsp;<hr />
               </form>
           </div>
-          {(this.state.isLogging) ? <LoadingSpinnerComponent /> : null }
+          {(this.state.isLogging) ? <LoadingSpinnerComponent type="login" /> : null }
       </div>
     );
   }

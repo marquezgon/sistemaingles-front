@@ -10,7 +10,7 @@ class DashboardComponent extends React.Component {
     constructor(props) {
         super(props)
 
-        this.state = {quizes: []};
+        this.state = {quizes: [], selectedQuiz: null};
     }
 
     componentDidMount() {
@@ -21,7 +21,7 @@ class DashboardComponent extends React.Component {
               "Authorization":`Bearer ${localStorage.mexEngToken}`,
           },
           success: function(quizes) {
-              this.setState({quizes});
+              this.setState({quizes, selectedQuiz: quizes[0]});
           }.bind(this),
           complete: function() {
 
@@ -32,27 +32,22 @@ class DashboardComponent extends React.Component {
     }
 
     render() {
-    return (
-      <div>
-      <HeaderComponent />
-      <div id="wrapper">
-        <LeftSidebarComponent />
-        <QuizSelectorComponent quizes={this.state.quizes} />
-        {/* <div id="sidebar-wrapper-right">
-          <ul className="sidebar-nav">
-            <li className="sidebar-brand">
-              <h3 className="text-center h3-sidebar-brand">Historial</h3>
-            </li>
-            <li>
-              <a href="/">Historial</a>
-            </li>
-          </ul>
-        </div> */}
-        <MainQuizContainer quiz={this.state.quizes[0]} />
-      </div>
-      <NewQuizModal />
-    </div>
-    );
+
+        return (
+            <div>
+                <HeaderComponent />
+                <div id="wrapper">
+                    <LeftSidebarComponent />
+                    <QuizSelectorComponent quizes={this.state.quizes} onQuizSelect={selectedQuiz =>  this.setState({ selectedQuiz }) } />
+                    <div className="quiz-container">
+                        <div className="quiz-subcontainer">
+                            <MainQuizContainer quiz={this.state.selectedQuiz} />
+                        </div>
+                    </div>
+                </div>
+                <NewQuizModal />
+            </div>
+        );
     }
 }
 

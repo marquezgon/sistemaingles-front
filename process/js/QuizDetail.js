@@ -16,8 +16,16 @@ class QuizDetail extends React.Component {
             fontSize: '16px'
         };
 
-        const leftMargin = {
-            marginLeft: '15px'
+        const preguntasBorderColor = {
+            borderBottom: '3px solid #3AC2A6'
+        };
+
+        const topMargin = {
+            marginTop: '15px'
+        };
+
+        const topMargin30 = {
+            marginTop: '30px'
         };
 
         return (
@@ -27,16 +35,16 @@ class QuizDetail extends React.Component {
                         <img src="img/quiz.png" width="70" height="70" />
                     </div>
                     <div className="media-body">
-                        <h3 className="quiz-name-header">{quizTitle}</h3>
+                        <h3 style={topMargin} className="quiz-name-header">{quizTitle}</h3>
                         <p className="quiz-name-sub" style={quizSubStyle}>{quizDescription}</p>
                     </div>
                 </div>
-                <div className="row">
-                    <div className="col-md-12">Preguntas</div>
+                <div style={topMargin30} className="row">
+                    <div className="col-md-12"><h4 className="preguntasH4">Preguntas</h4></div>
                     {/* <hr />
                     <span></span> */}
-                    <div style={leftMargin} className="col-md-3"></div>
-                    <div style={leftMargin} className="col-md-9"></div>
+                    <div style={preguntasBorderColor} className="col-md-3 preguntas-col-h4"></div>
+                    <div className="col-md-9 preguntas-col-h4"></div>
                 </div>
             </div>
         );
