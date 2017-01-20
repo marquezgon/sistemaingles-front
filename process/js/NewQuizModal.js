@@ -1,29 +1,35 @@
 var React = require('React');
+var Select2 = require('react-select2-wrapper');
 
-const MAX_TITLE_CHARS = 25;
-const MAX_DESCRIPTION_CHARS = 40;
+var ModalLabelTextfield = require('./ModalLabelTextfield');
 
 class NewQuizModal extends React.Component {
-    constructor(props) {
-        super(props);
 
-        this.state = {titleChars: 25, titleText: '', descChars: 40, descText: ''};
-        this.handleUserInput = this.handleUserInput.bind(this);
+    constructor(props) {
+        super(props)
+
+        this.state = {currentSections: []};
     }
 
-    handleUserInput(refName, event) {
-        if(refName === "title") {
-            var charsRemaining = this.state.titleChars;
-            charsRemaining = MAX_TITLE_CHARS - this.refs.titleInput.value.length
-            this.setState({titleChars: charsRemaining, titleText: this.refs.titleInput.value});
-        } else if(refName === "description") {
-            var charsRemaining = this.state.descChars;
-            charsRemaining = MAX_DESCRIPTION_CHARS - this.refs.descInput.value.length
-            this.setState({descChars: charsRemaining, descText: this.refs.descInput.value});
+    onChange(index) {
+        if(index > -1) {
+            const currentSections = this.props.booksAndSections[index].sections.map((item) => {
+                return {text: item.name, id: item._id};
+            });
+
+            this.setState({currentSections: currentSections});
         }
     }
 
     render() {
+        if(!this.props.booksAndSections) {
+            return <div>Loading...</div>
+        }
+
+        const books = this.props.booksAndSections.map((item, index) => {
+            return {text: item.book.name, id: index};
+        });
+
         return (
             <div id="newQuizModal" className="modal fade" role="dialog">
               <div className="modal-dialog new-quiz-modal-dialog">
@@ -37,26 +43,34 @@ class NewQuizModal extends React.Component {
                         <div className="col-md-12">
                             <h1 className="text-center custom-modal-header">CREAR QUIZ</h1>
                             <div className="col-md-12 new-quiz-main-div">
+                                <ModalLabelTextfield label="Título" maxLength="25" placeholder="Título (máx. 25)" />
+                                <ModalLabelTextfield label="Descripción" maxLength="40" placeholder="Descripción (máx. 40)" />
                                 <div className="col-md-12">
                                     <div className="col-md-4">
-                                        <h4 className="text-right">Título</h4>
+                                        <h4 className="text-right">Libro</h4>
                                     </div>
                                     <div className="col-md-6">
-                                        <input maxLength="25" ref="titleInput" onChange={this.handleUserInput.bind(this, "title")} value={this.state.titleText} className="new-quiz-input" type="text" placeholder="Título (máx. 25)" />
-                                    </div>
-                                    <div className="col-md-2">
-                                        <h5>{`${this.state.titleChars} rest.`}</h5>
+                                        <Select2 onChange={event => { this.onChange(event.target.selectedIndex) }} className="select2-quiz" data={books}
+                                          options={
+                                            {
+                                              placeholder: 'Selecciona un libro',
+                                            }
+                                          }
+                                        />
                                     </div>
                                 </div>
                                 <div className="col-md-12">
                                     <div className="col-md-4">
-                                        <h4 className="text-right">Descripción</h4>
+                                        <h4 className="text-right">Lección</h4>
                                     </div>
                                     <div className="col-md-6">
-                                        <input maxLength="40" ref="descInput" onChange={this.handleUserInput.bind(this, "description")} value={this.state.descText} className="new-quiz-input" type="text" placeholder="Descripción (máx. 40)" />
-                                    </div>
-                                    <div className="col-md-2">
-                                        <h5>{`${this.state.descChars} rest.`}</h5>
+                                        <Select2 multiple className="select2-quiz" data={this.state.currentSections}
+                                          options={
+                                            {
+                                              placeholder: 'Selecciona una o más lecciónes',
+                                            }
+                                          }
+                                        />
                                     </div>
                                 </div>
                             </div>

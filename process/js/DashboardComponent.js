@@ -10,7 +10,7 @@ class DashboardComponent extends React.Component {
     constructor(props) {
         super(props)
 
-        this.state = {quizes: [], selectedQuiz: null};
+        this.state = {quizes: [], selectedQuiz: null, booksAndSections: [], selectedBook: null};
     }
 
     componentDidMount() {
@@ -20,8 +20,8 @@ class DashboardComponent extends React.Component {
           headers: {
               "Authorization":`Bearer ${localStorage.mexEngToken}`,
           },
-          success: function(quizes) {
-              this.setState({quizes, selectedQuiz: quizes[0]});
+          success: function(data) {
+              this.setState({quizes: data.quizes, selectedQuiz: data.quizes[0], booksAndSections: data.sectionAndBooks});
           }.bind(this),
           complete: function() {
 
@@ -32,7 +32,6 @@ class DashboardComponent extends React.Component {
     }
 
     render() {
-
         return (
             <div>
                 <HeaderComponent />
@@ -45,7 +44,7 @@ class DashboardComponent extends React.Component {
                         </div>
                     </div>
                 </div>
-                <NewQuizModal />
+                <NewQuizModal booksAndSections={this.state.booksAndSections} />
             </div>
         );
     }
