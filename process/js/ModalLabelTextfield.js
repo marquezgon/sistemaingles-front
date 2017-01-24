@@ -21,7 +21,7 @@ class ModalLabelTextfield extends React.Component {
                     <h4 className="text-right">{this.props.label}</h4>
                 </div>
                 <div className="col-md-6">
-                    <input maxLength={this.props.maxLength} onChange={ event => this.handleUserInput(event.target.value)} value={this.state.text} className="new-quiz-input" type="text" placeholder={this.props.placeholder} />
+                    <input name={this.props.name} maxLength={this.props.maxLength} onChange={ event => this.handleUserInput(event.target.value)} value={this.state.text} className="new-quiz-input" type="text" placeholder={this.props.placeholder} />
                 </div>
                 <div className="col-md-2">
                     <h5 className="text-left">{`${this.state.charsRemaining} rest.`}</h5>

@@ -9,11 +9,23 @@ class QuizList extends React.Component {
         super(props)
 
         this.handleClick = this.handleClick.bind(this);
+        this.onQuizDelete = this.onQuizDelete.bind(this);
     }
 
-    handleClick() {
-        this.props.onQuizSelect(this.props.quiz);
-        this.props.onSetActive(this.props.index);
+    handleClick(event) {
+        //we check to see if event target is delete button
+        //if so, we call onQuizDelete
+        if(event.target.className === "delete-quiz" && event.target.tagName === "A") {
+            this.props.onQuizDelete(this.props.quiz);
+        } else {
+            this.props.onQuizSelect(this.props.quiz);
+            this.props.onSetActive(this.props.index);
+        }
+    }
+
+    onQuizDelete() {
+        event.preventDefault();
+        //
     }
 
     render() {
@@ -28,7 +40,7 @@ class QuizList extends React.Component {
         const quizTitle = this.props.quiz.title.length <= 13 ? this.props.quiz.title : this.props.quiz.title.substring(0, 9) + "..." ;
 
         return (
-          <li className="quiz-list-li" onClick={this.handleClick} >
+          <li ref="li" className="quiz-list-li" onClick={this.handleClick} >
               <div style={fixedPadding} className={this.props.activeIndex === this.props.index ? "col-md-12 quiz-col quiz-col-active" : "col-md-12 quiz-col" } >
                 <div style={fixedPadding} className="col-md-2 quiz-list-padding-top">
                   <img src="img/quiz.png" width="40" height="40" />
@@ -39,11 +51,13 @@ class QuizList extends React.Component {
                         <p className="quiz-name-sub"><TimeAgo date={quizDate} formatter={formatter} /></p>
                     </div>
                 </div>
-                { this.props.quiz.status === 2 ?
-                    <div className="col-md-2 quiz-list-padding-top">
-                        <i className="glyphicon glyphicon-ok"></i>
-                    </div> : null
-                }
+                <div className="col-md-2">
+                    <a className="delete-quiz">x</a>
+                    { this.props.quiz.status === 0 ?
+                        <i className="quiz-glyphicon-ok glyphicon glyphicon-ok"></i> :
+                        null
+                    }
+                </div>
               </div>
           </li>
         )

@@ -35,11 +35,17 @@ class QuizSelectorComponent extends React.Component {
       outline: 'none'
     }
 
+    const height = this.props.quizes.length > 12 ? (60 * 59.8)+'px' : '100%';
+    const ulHeight = {
+        height: height,
+        overflowY: 'auto'
+    }
+
     const quizItems = this.props.quizes.map((quiz, index) => {
         if(quiz.title.toLowerCase().indexOf(this.state.filterText.toLowerCase()) == -1) {
             return ;
         } else {
-            return <QuizList onSetActive={this.setActiveItem} onQuizSelect={this.props.onQuizSelect} quiz={quiz} key={index} index={index} activeIndex={this.state.activeIndex} />
+            return <QuizList onQuizDelete={this.props.onQuizDelete} onSetActive={this.setActiveItem} onQuizSelect={this.props.onQuizSelect} quiz={quiz} key={index} index={index} activeIndex={this.state.activeIndex} />
         }
     });
 
@@ -49,7 +55,7 @@ class QuizSelectorComponent extends React.Component {
             <a href="#" className="hover-change-color" title="Nuevo Quiz" style={linkStyle} data-toggle="modal" data-target="#newQuizModal"><i style={glyphStyle} className="glyphicon glyphicon-plus"></i></a>
             <SearchSidebarComponent filterText={this.state.filterText} onUserInput={this.handleUserInput} />
           </div>
-          <ul className="sidebar-nav">
+          <ul className="sidebar-nav" style={ulHeight}>
               {quizItems}
           </ul>
       </div>

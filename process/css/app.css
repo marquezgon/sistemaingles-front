@@ -55,7 +55,12 @@
     border-color: #3ac2a6;
 }
 
-.btn-success:hover {
+.btn-default, .btn-default:hover, .btn-default:active, .btn-default:focus, .btn-default:active:focus, .btn-default[disabled]:hover {
+    background-color: #bbb;
+    color: white;
+}
+
+.btn-success:hover, .btn-default:hover {
     opacity: .82;
 }
 
@@ -594,11 +599,20 @@ h5 {
     color: #666666;
 }
 
-.glyphicon-ok {
-    color: #3AC2A6;
+.glyphicon-ok, .glyphicon-ok-circle, .delete-quiz:hover {
+    color: #3AC2A6 !important;
 }
 
 .clear-search {
     color: #666666;
     cursor: pointer;
+}
+
+.delete-quiz {
+    cursor: pointer;
+    line-height: 24px;
+}
+
+.quiz-glyphicon-ok {
+    top: -6px;
 }
