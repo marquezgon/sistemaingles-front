@@ -587,7 +587,7 @@ a.hover-change-color:hover {
     background-color: #f8f8f8;
     height: 100%;
     word-break: normal;
-    padding-bottom: 12px;
+    margin-bottom: 12px;
 }
 
 h5 {
@@ -595,11 +595,11 @@ h5 {
     color: #666666;
 }
 
-.custom-modal-header, h4 {
+.custom-modal-header, h4, .text-to-speech-a {
     color: #666666;
 }
 
-.glyphicon-ok, .glyphicon-ok-circle, .delete-quiz:hover {
+.glyphicon-ok, .glyphicon-ok-circle, .delete-quiz:hover, .text-to-speech-a:hover {
     color: #3AC2A6 !important;
 }
 
@@ -615,4 +615,12 @@ h5 {
 
 .quiz-glyphicon-ok {
     top: -6px;
+}
+
+.text-to-speech-a {
+    cursor: pointer;
+}
+
+.text-to-speech-a .glyphicon {
+    top: 8px;
 }

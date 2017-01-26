@@ -22,7 +22,7 @@ class MainQuizContainer extends React.Component {
 
         return (
             <div>
-                <QuizDetail quiz={quiz} />
+                <QuizDetail bookName={this.props.bookName} sectionNames={this.props.sectionNames} quiz={quiz} />
                 <div className="col-md-12" style={preguntasListDiv}>
                     {preguntasItems}
                 </div>

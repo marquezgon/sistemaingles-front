@@ -2,7 +2,6 @@ var React = require('react');
 
 class QuizDetail extends React.Component {
 
-
     render() {
 
         if(!this.props.quiz) {
@@ -24,8 +23,8 @@ class QuizDetail extends React.Component {
             marginTop: '15px'
         };
 
-        const topMargin30 = {
-            marginTop: '30px'
+        const topMargin20 = {
+            marginTop: '20px'
         };
 
         return (
@@ -38,8 +37,12 @@ class QuizDetail extends React.Component {
                         <h3 style={topMargin} className="quiz-name-header">{quizTitle}</h3>
                         <p className="quiz-name-sub" style={quizSubStyle}>{quizDescription}</p>
                     </div>
+                    <div className="col-md-12">
+                        <h5><b>Libro:</b> {this.props.bookName}</h5>
+                        <h5><b>Sección:</b> {this.props.sectionNames.join(', ')}</h5>
+                    </div>
                 </div>
-                <div style={topMargin30} className="row">
+                <div style={topMargin20} className="row">
                     <div className="col-md-12"><h4 className="preguntasH4">Preguntas</h4></div>
                     {/* <hr />
                     <span></span> */}

@@ -37,6 +37,7 @@ jspm_packages
 .node_repl_history
 
 app/js/render.js
+app/polly.json
 app/css/**/*.css
 .DS_Store
 .tmp

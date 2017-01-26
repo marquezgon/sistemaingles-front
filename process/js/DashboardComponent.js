@@ -7,12 +7,13 @@ var NewQuizModal = require('./NewQuizModal');
 var MainQuizContainer = require('./MainQuizContainer');
 
 var ajaxHelper = require('./helpers/ajax');
+var helpers = require('./helpers/helpers');
 
 class DashboardComponent extends React.Component {
     constructor(props) {
         super(props)
 
-        this.state = {quizes: [], selectedQuiz: null, booksAndSections: [], selectedBook: null};
+        this.state = {quizes: [], selectedQuiz: null, booksAndSections: [], selectedBook: null, bookName: '', sectionNames: ''};
         this.updateQuizList = this.updateQuizList.bind(this);
         this.deleteQuiz = this.deleteQuiz.bind(this);
     }
@@ -24,23 +25,29 @@ class DashboardComponent extends React.Component {
     updateQuizList(quiz) {
         var quizes = this.state.quizes;
         quizes.unshift(quiz);
-        this.setState({quizes: quizes});
+        this.setState({quizes: quizes, selectedQuiz: quizes[0]});
     }
 
     deleteQuiz(selectedQuiz) {
         ajaxHelper.deleteQuiz(this, selectedQuiz);
     }
 
+    onQuizSelect(selectedQuiz) {
+        const bookSectionNames = helpers.getBookSectionsName(this.state.booksAndSections, selectedQuiz);
+        this.setState({ selectedQuiz, bookName: bookSectionNames.book, sectionNames: bookSectionNames.sections });
+    }
+
     render() {
+
         return (
             <div>
                 <HeaderComponent />
                 <div id="wrapper">
                     <LeftSidebarComponent />
-                    <QuizSelectorComponent quizes={this.state.quizes} onQuizSelect={selectedQuiz => this.setState({ selectedQuiz }) } onQuizDelete={this.deleteQuiz} />
+                    <QuizSelectorComponent quizes={this.state.quizes} onQuizSelect={selectedQuiz => this.onQuizSelect(selectedQuiz) } onQuizDelete={this.deleteQuiz} />
                     <div className="quiz-container">
                         <div className="quiz-subcontainer">
-                            <MainQuizContainer quiz={this.state.selectedQuiz} />
+                            <MainQuizContainer quiz={this.state.selectedQuiz} bookName={this.state.bookName} sectionNames={this.state.sectionNames} />
                         </div>
                     </div>
                 </div>

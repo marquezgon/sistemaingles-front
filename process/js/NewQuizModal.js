@@ -9,6 +9,8 @@ var QuestionsDropdown = require('./QuestionsDropdown');
 var QuizCreated = require('./QuizCreated');
 var LoadingSpinnerComponent = require('./LoadingSpinnerComponent');
 
+var ajaxHelper = require('./helpers/ajax');
+
 class NewQuizModal extends React.Component {
 
     constructor(props) {
@@ -39,30 +41,8 @@ class NewQuizModal extends React.Component {
             const bookId = this.props.booksAndSections[this.state.index].book.id;
             const formData = $('#newQuizForm').serialize()+'&book='+bookId;
 
-            $.ajax({
-                type: 'POST',
-                url: "http://localhost:8000/quiz",
-                data: formData,
-                headers: {
-                    "Authorization":`Bearer ${localStorage.mexEngToken}`,
-                },
-                success: function(quiz) {
-                    this.props.updateQuizList(quiz);
-                    this.setState({isCreated: true});
-                    setTimeout(() => {
-                        $('#newQuizModal').modal('hide');
-                        this.setState({isCreated: false});
-                    }, 1250);
-                }.bind(this),
-                complete: function() {
-                    this.setState({isCreatingQuiz: false})
-                }.bind(this),
-                error: function(jqXHR, textStatus, errorThrown) {
-                //   if(jqXHR.responseJSON.message) {
-                //     this.setState({errMsg: jqXHR.responseJSON.message});
-                //   }
-                }.bind(this)
-            });
+            ajaxHelper.createQuiz(this, formData);
+
         }
         catch (e) {
             throw e;
