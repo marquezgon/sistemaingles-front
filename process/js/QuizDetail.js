@@ -1,6 +1,17 @@
+var $ = jQuery = require('jquery');
 var React = require('react');
 
 class QuizDetail extends React.Component {
+
+    constructor(props) {
+        super(props)
+
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick() {
+        $('#takeQuizModal').modal('show');
+    }
 
     render() {
 
@@ -38,16 +49,29 @@ class QuizDetail extends React.Component {
                         <p className="quiz-name-sub" style={quizSubStyle}>{quizDescription}</p>
                     </div>
                     <div className="col-md-12">
-                        <h5><b>Libro:</b> {this.props.bookName}</h5>
-                        <h5><b>Sección:</b> {this.props.sectionNames.join(', ')}</h5>
+                        <div className="row">
+                            <div className="col-md-12">
+                                <h5><b>Libro:</b> {this.props.bookName}</h5>
+                                <h5><b>Sección:</b> {this.props.sectionNames.join(', ')}</h5>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
                 <div style={topMargin20} className="row">
-                    <div className="col-md-12"><h4 className="preguntasH4">Preguntas</h4></div>
-                    {/* <hr />
-                    <span></span> */}
-                    <div style={preguntasBorderColor} className="col-md-3 preguntas-col-h4"></div>
-                    <div className="col-md-9 preguntas-col-h4"></div>
+                    {
+                        this.props.quiz.status === 1 ?
+                        <div className="col-md-12">
+                            <button type="button" onClick={this.handleClick} className="btn btn-success">TOMAR QUIZ</button>
+                        </div> :
+                        <div>
+                            <div className="col-md-12">
+                                <h4 className="preguntasH4">Preguntas</h4>
+                            </div>
+                            <div style={preguntasBorderColor} className="col-md-3 preguntas-col-h4"></div>
+                            <div className="col-md-9 preguntas-col-h4"></div>
+                        </div>
+                    }
                 </div>
             </div>
         );

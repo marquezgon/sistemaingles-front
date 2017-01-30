@@ -14,7 +14,7 @@ class QuizCreated extends React.Component {
         return (
             <div className="col-md-12 text-center" style={quizDiv}>
                 <i className="glyphicon glyphicon-ok-circle"></i>
-                <h1 style={h1Style} className="custom-modal-header">¡Quiz Creado!</h1>
+                <h1 style={h1Style} className="custom-modal-header">{this.props.text}</h1>
             </div>
         )
     }

@@ -12,9 +12,11 @@ var LoadingSpinnerComponent = React.createClass({
           bottom: '0'
       }
 
+      const additionalClasses = this.props.additionalClasses ?  `spinner ${this.props.additionalClasses}` : 'spinner';
+
       return (
 
-          <div style={this.props.type === "quiz" ? quizStyles : this.props.type === "quizModal" ? quizModalStyles : null } className="spinner">
+          <div style={this.props.type === "quiz" ? quizStyles : this.props.type === "quizModal" ? quizModalStyles : null } className={additionalClasses}>
               <div className="bounce1"></div>
               <div className="bounce2"></div>
               <div className="bounce3"></div>

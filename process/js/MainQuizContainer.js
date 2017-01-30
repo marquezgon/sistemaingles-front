@@ -12,6 +12,8 @@ class MainQuizContainer extends React.Component {
             return <LoadingSpinnerComponent type="quiz" />;
         }
 
+        console.log(quiz);
+
         const preguntasListDiv = {
             marginTop: '30px'
         };
@@ -23,9 +25,11 @@ class MainQuizContainer extends React.Component {
         return (
             <div>
                 <QuizDetail bookName={this.props.bookName} sectionNames={this.props.sectionNames} quiz={quiz} />
-                <div className="col-md-12" style={preguntasListDiv}>
-                    {preguntasItems}
-                </div>
+                { quiz.status === 0 ?
+                    <div className="col-md-12" style={preguntasListDiv}>
+                        {preguntasItems}
+                    </div> : null
+                }
             </div>
         );
     }

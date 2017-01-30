@@ -22,12 +22,25 @@ class PreguntasListItem extends React.Component {
                             <a className="text-to-speech-a" onClick={event => this.handleClick(this.props.question.text)}><i className="glyphicon glyphicon-volume-up"></i></a>
                         </div>
                     </div>
-                    <div className="col-md-12">
-                        <h5><b>Tu respuesta:</b></h5>
-                        <h5>{this.props.question.studentAnswer}</h5>
-                        <hr />
-                        <h5><b>Respuesta:</b></h5>
-                        <h5>{this.props.question.answer}</h5>
+                    <div className="row">
+                        <div className="col-md-12">
+                            <h5><b>Tu respuesta:</b></h5>
+                        </div>
+                        <div className="col-md-10">
+                            <h5>{this.props.question.studentAnswer}</h5>
+                        </div>
+                        <div className="col-md-12">
+                            <hr />
+                        </div>
+                        <div className="col-md-12">
+                            <h5><b>Respuesta:</b></h5>
+                        </div>
+                        <div className="col-md-10">
+                            <h5>{this.props.question.answer}</h5>
+                        </div>
+                        <div className="col-md-2">
+                            <a className="text-to-speech-a" onClick={event => this.handleClick(this.props.question.answer)}><i className="glyphicon glyphicon-volume-up"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -63,7 +63,7 @@ class NewQuizModal extends React.Component {
                   </div>
                   {
                       this.state.isCreated ?
-                      <QuizCreated /> :
+                      <QuizCreated text="¡Quiz Creado!" /> :
                       <form id="newQuizForm" onSubmit={this.handleSubmit}>
                           <div className="modal-body">
                             <div className="row">

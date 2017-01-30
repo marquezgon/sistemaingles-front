@@ -32,6 +32,28 @@ module.exports = {
         }.bind(component)
       });
   },
+  sendSolvedQuiz(component, quizId, quizForm) {
+      $.ajax({
+        type: 'POST',
+        url: `http://localhost:8000/quiz/solved/${quizId}`,
+        headers: {
+            "Authorization":`Bearer ${localStorage.mexEngToken}`,
+        },
+        data: quizForm,
+        success: function(data) {
+            component.setState({isSent: true});
+            setTimeout(() => {
+                $('#takeQuizModal').modal('hide');
+                component.setState({isSent: false});
+            }, 1250);
+        }.bind(component),
+        complete: function() {
+            component.setState({isSendingQuiz: false})
+        }.bind(component),
+        error: function(jqXHR, textStatus, errorThrown) {
+        }.bind(component)
+      });
+  },
   fetchQuizes(component) {
       $.ajax({
         type: 'GET',
@@ -78,7 +100,7 @@ module.exports = {
   },
   textToSpeech(text) {
       const request = new XMLHttpRequest();
-      request.open('POST', 'http://35.165.45.15:8000/polly/create', true);
+      request.open('POST', 'http://localhost:8000/polly/create', true);
       request.responseType = 'arraybuffer';
 
       request.onload = function onLoad() {

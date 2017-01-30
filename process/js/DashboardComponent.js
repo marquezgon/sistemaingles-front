@@ -4,6 +4,7 @@ var HeaderComponent = require('./HeaderComponent');
 var LeftSidebarComponent = require('./LeftSidebarComponent');
 var QuizSelectorComponent = require('./QuizSelectorComponent');
 var NewQuizModal = require('./NewQuizModal');
+var TakeQuizModal = require('./TakeQuizModal');
 var MainQuizContainer = require('./MainQuizContainer');
 
 var ajaxHelper = require('./helpers/ajax');
@@ -52,6 +53,7 @@ class DashboardComponent extends React.Component {
                     </div>
                 </div>
                 <NewQuizModal updateQuizList={this.updateQuizList} booksAndSections={this.state.booksAndSections} />
+                <TakeQuizModal quiz={this.state.selectedQuiz} />
             </div>
         );
     }
