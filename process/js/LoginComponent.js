@@ -25,7 +25,7 @@ class LoginComponent extends React.Component {
       data: formData,
       success: function(data) {
         localStorage.mexEngToken = data.token;
-        this.props.router.replace('/')
+        this.props.router.replace('/quiz')
       }.bind(this),
       complete: function() {
         this.setState({isLogging: false});

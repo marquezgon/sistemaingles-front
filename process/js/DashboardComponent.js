@@ -1,10 +1,9 @@
 var $ = jQuery = require('jquery');
 var React = require('React');
-var HeaderComponent = require('./HeaderComponent');
-var LeftSidebarComponent = require('./LeftSidebarComponent');
 var QuizSelectorComponent = require('./QuizSelectorComponent');
 var NewQuizModal = require('./NewQuizModal');
 var TakeQuizModal = require('./TakeQuizModal');
+var UpdateProfileModal = require('./UpdateProfileModal');
 var MainQuizContainer = require('./MainQuizContainer');
 
 var ajaxHelper = require('./helpers/ajax');
@@ -14,13 +13,29 @@ class DashboardComponent extends React.Component {
     constructor(props) {
         super(props)
 
-        this.state = {quizes: [], selectedQuiz: null, booksAndSections: [], selectedBook: null, bookName: '', sectionNames: ''};
+        this.state = {quizes: [], selectedQuiz: null, booksAndSections: [], selectedBook: null, bookName: '', sectionNames: '', studentInfo: null, showProfileModal: false};
         this.updateQuizList = this.updateQuizList.bind(this);
         this.deleteQuiz = this.deleteQuiz.bind(this);
+        this.updateQuizSolved = this.updateQuizSolved.bind(this);
+        this.updateStudentInfo = this.updateStudentInfo.bind(this);
     }
 
     componentDidMount() {
         ajaxHelper.fetchQuizes(this);
+        ajaxHelper.fetchStudentInfo(this);
+    }
+
+    updateQuizSolved(selectedQuiz) {
+        this.setState({selectedQuiz, quizes: this.state.quizes.map((quiz) => {
+            if(quiz._id == selectedQuiz._id) {
+                quiz = selectedQuiz;
+            }
+            return quiz;
+        })});
+    }
+
+    updateStudentInfo(studentInfo) {
+        this.setState({studentInfo});
     }
 
     updateQuizList(quiz) {
@@ -39,21 +54,18 @@ class DashboardComponent extends React.Component {
     }
 
     render() {
-
         return (
             <div>
-                <HeaderComponent />
-                <div id="wrapper">
-                    <LeftSidebarComponent />
-                    <QuizSelectorComponent quizes={this.state.quizes} onQuizSelect={selectedQuiz => this.onQuizSelect(selectedQuiz) } onQuizDelete={this.deleteQuiz} />
-                    <div className="quiz-container">
-                        <div className="quiz-subcontainer">
-                            <MainQuizContainer quiz={this.state.selectedQuiz} bookName={this.state.bookName} sectionNames={this.state.sectionNames} />
-                        </div>
+                <QuizSelectorComponent quizes={this.state.quizes} onQuizSelect={selectedQuiz => this.onQuizSelect(selectedQuiz) } onQuizDelete={this.deleteQuiz} />
+                <div className="quiz-container">
+                    <div className="quiz-subcontainer">
+                        <MainQuizContainer quiz={this.state.selectedQuiz} bookName={this.state.bookName} sectionNames={this.state.sectionNames} />
                     </div>
                 </div>
                 <NewQuizModal updateQuizList={this.updateQuizList} booksAndSections={this.state.booksAndSections} />
-                <TakeQuizModal quiz={this.state.selectedQuiz} />
+                <TakeQuizModal sendUpdatedSolvedQuiz={this.updateQuizSolved} quiz={this.state.selectedQuiz} />
+
+                <UpdateProfileModal updateStudentInfo={this.updateStudentInfo} studentInfo={this.state.studentInfo} />
             </div>
         );
     }

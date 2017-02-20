@@ -1,7 +1,7 @@
 var $ = jQuery = require('jquery');
 var React = require('react');
 
-class QuizDetail extends React.Component {
+class ExamDetail extends React.Component {
 
     constructor(props) {
         super(props)
@@ -10,16 +10,17 @@ class QuizDetail extends React.Component {
     }
 
     handleClick() {
-        $('#takeQuizModal').modal('show');
+        $('#takeExamModal').modal('show');
     }
 
     render() {
-        if(!this.props.quiz) {
+
+        if(!this.props.exam) {
             return <div>Loading...</div>;
         }
 
-        const quizTitle = this.props.quiz.title;
-        const quizDescription = this.props.quiz.description;
+        const examTitle = this.props.exam.title;
+        const examDescription = this.props.exam.description;
 
         const quizSubStyle = {
             fontSize: '16px'
@@ -44,14 +45,13 @@ class QuizDetail extends React.Component {
                         <img src="img/quiz.png" width="70" height="70" />
                     </div>
                     <div className="media-body">
-                        <h3 style={topMargin} className="quiz-name-header">{quizTitle}</h3>
-                        <p className="quiz-name-sub" style={quizSubStyle}>{quizDescription}</p>
+                        <h3 style={topMargin} className="quiz-name-header">{examTitle}</h3>
+                        <p className="quiz-name-sub" style={quizSubStyle}>{examDescription}</p>
                     </div>
                     <div className="col-md-12">
                         <div className="row">
                             <div className="col-md-12">
                                 <h5><b>Libro:</b> {this.props.bookName}</h5>
-                                <h5><b>Sección:</b> {this.props.sectionNames.join(', ')}</h5>
                             </div>
                         </div>
                     </div>
@@ -59,9 +59,9 @@ class QuizDetail extends React.Component {
 
                 <div style={topMargin20} className="row">
                     {
-                        this.props.quiz.status === 1 ?
+                        this.props.exam.status === 1 ?
                         <div className="col-md-12">
-                            <button type="button" onClick={this.handleClick} className="btn btn-success">TOMAR QUIZ</button>
+                            <button type="button" onClick={this.handleClick} className="btn btn-success">TOMAR EXAMEN</button>
                         </div> :
                         <div>
                             <div className="col-md-12">
@@ -77,4 +77,4 @@ class QuizDetail extends React.Component {
     }
 }
 
-module.exports = QuizDetail;
+module.exports = ExamDetail;

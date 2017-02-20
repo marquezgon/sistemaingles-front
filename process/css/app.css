@@ -337,7 +337,7 @@
     transition: all 0.5s ease;
 }
 
-#quiz-wrapper {
+.quiz-wrapper {
     width: 250px;
     position: fixed;
     z-index: 1000;
@@ -347,7 +347,7 @@
     height: 100%;
 }
 
-#quiz-wrapper .sidebar-nav {
+.quiz-wrapper .sidebar-nav {
   position: relative;
   width: 100%;
   background-color: #f8f8f8;
@@ -417,7 +417,7 @@ input[type=search] {
 	transition: all .5s;
 }
 
-#quiz-wrapper .sidebar-nav li {
+.quiz-wrapper .sidebar-nav li {
   padding-left: 0px;
   background-color: #f8f8f8;
 }
@@ -426,7 +426,7 @@ input[type=search] {
   display: none;
 }
 
-#quiz-wrapper .search-sidebar span {
+.quiz-wrapper .search-sidebar span {
   padding-left: 10px;
 }
 
@@ -555,7 +555,7 @@ a.hover-change-color:hover {
     font-size: 16px !important;
 }
 
-.select2-quiz .select2-container--default .select2-selection--single .select2-selection__rendered {
+.select2-quiz .select2-container--default .select2-selection--single .select2-selection__rendered, .edit-field-a {
     color: #666666 !important;
 }
 
@@ -599,8 +599,12 @@ h5 {
     color: #666666;
 }
 
-.glyphicon-ok, .glyphicon-ok-circle, .delete-quiz:hover, .text-to-speech-a:hover {
+.glyphicon-ok, .glyphicon-ok-circle, .delete-quiz:hover, .text-to-speech-a:hover, .mark-correct:hover .glyphicon-heart, .mark-correct.selected .glyphicon-heart {
     color: #3AC2A6 !important;
+}
+
+.mark-wrong:hover .glyphicon-remove, .mark-wrong.selected .glyphicon-remove {
+    color: #c9302c !important;
 }
 
 .clear-search {
@@ -617,8 +621,12 @@ h5 {
     top: -6px;
 }
 
-.text-to-speech-a {
+.text-to-speech-a, .mark-correct, .mark-wrong, .profile-a, .edit-field-a {
     cursor: pointer;
+}
+
+.mark-correct, .mark-wrong {
+    font-size: 20px;
 }
 
 .text-to-speech-a .glyphicon {
@@ -629,4 +637,25 @@ h5 {
     resize: none;
     outline: none;
     border: none;
+}
+
+.mark-correct {
+    margin-right: 4px;
+}
+
+.mark-wrong {
+    margin-left: 4px;
+}
+
+.mark-correct .glyphicon-heart, .mark-wrong .glyphicon-remove {
+    color: #bbb !important;
+    top: 8px;
+}
+
+.edit-field-a {
+    font-size: 12px;
+}
+
+.edit-field-a .glyphicon-pencil {
+    top:6px;
 }

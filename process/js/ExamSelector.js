@@ -2,13 +2,12 @@ var React = require('React');
 var Link = require('react-router').Link;
 
 var SearchSidebarComponent = require('./SearchSidebarComponent');
-var QuizList = require('./QuizList');
+var ExamList = require('./ExamList');
 
-class QuizSelectorComponent extends React.Component {
+class ExamSelectorComponent extends React.Component {
 
     constructor(props) {
         super(props)
-
         this.state = {filterText: '', activeIndex: 0};
         this.handleUserInput = this.handleUserInput.bind(this);
         this.setActiveItem = this.setActiveItem.bind(this);
@@ -35,17 +34,17 @@ class QuizSelectorComponent extends React.Component {
       outline: 'none'
     }
 
-    const height = this.props.quizes.length > 12 ? (60 * 59.8)+'px' : '100%';
+    const height = this.props.exams.length > 12 ? (60 * 59.8)+'px' : '100%';
     const ulHeight = {
         height: height,
         overflowY: 'auto'
     }
 
-    const quizItems = this.props.quizes.map((quiz, index) => {
-        if(quiz.title.toLowerCase().indexOf(this.state.filterText.toLowerCase()) == -1) {
+    const examItems = this.props.exams.map((exam, index) => {
+        if(exam.title.toLowerCase().indexOf(this.state.filterText.toLowerCase()) == -1) {
             return ;
         } else {
-            return <QuizList onQuizDelete={this.props.onQuizDelete} onSetActive={this.setActiveItem} onQuizSelect={this.props.onQuizSelect} quiz={quiz} key={index} index={index} activeIndex={this.state.activeIndex} />
+            return <ExamList onQuizDelete={this.props.onQuizDelete} onSetActive={this.setActiveItem} onExamSelect={this.props.onExamSelect} exam={exam} key={index} index={index} activeIndex={this.state.activeIndex} />
         }
     });
 
@@ -56,11 +55,11 @@ class QuizSelectorComponent extends React.Component {
             <SearchSidebarComponent filterText={this.state.filterText} onUserInput={this.handleUserInput} />
           </div>
           <ul className="sidebar-nav" style={ulHeight}>
-              {quizItems}
+              {examItems}
           </ul>
       </div>
     )
   }
 }
 
-module.exports = QuizSelectorComponent;
+module.exports = ExamSelectorComponent;

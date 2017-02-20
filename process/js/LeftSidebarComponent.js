@@ -7,7 +7,7 @@ class LeftSidebarComponent extends React.Component {
     return (
       <div id="sidebar-wrapper">
           <ul className="sidebar-nav left-sidebar-ul">
-            <NavLinkComponent to="/">
+            <NavLinkComponent to="/quiz">
               <i className="glyphicon glyphicon-pencil nav-link-i"></i> <span>Quiz</span>
             </NavLinkComponent>
             <NavLinkComponent to="/exam">

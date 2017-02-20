@@ -1,14 +1,13 @@
 var React = require('react');
-var QuizDetail = require('./QuizDetail');
+var ExamDetail = require('./ExamDetail');
 var LoadingSpinnerComponent = require('./LoadingSpinnerComponent');
 var PreguntasListItem = require('./PreguntasListItem');
 
-class MainQuizContainer extends React.Component {
+class MainExamContainer extends React.Component {
     render() {
+        const exam = this.props.exam;
 
-        const quiz = this.props.quiz;
-
-        if(!quiz) {
+        if(!exam) {
             return <LoadingSpinnerComponent type="quiz" />;
         }
 
@@ -16,14 +15,14 @@ class MainQuizContainer extends React.Component {
             marginTop: '30px'
         };
 
-        const preguntasItems = quiz.questions.map((item, index) => {
-            return <PreguntasListItem key={index} question={item} index={index} quiz={quiz._id} />
+        const preguntasItems = exam.questions.map((item, index) => {
+            return <PreguntasListItem key={index} question={item} index={index} quiz={exam._id} />
         });
 
         return (
             <div>
-                <QuizDetail bookName={this.props.bookName} sectionNames={this.props.sectionNames} quiz={quiz} />
-                { quiz.status === 0 ?
+                <ExamDetail bookName={this.props.bookName} exam={exam} />
+                { exam.status === 0 ?
                     <div className="col-md-12" style={preguntasListDiv}>
                         {preguntasItems}
                     </div> : null
@@ -33,4 +32,4 @@ class MainQuizContainer extends React.Component {
     }
 }
 
-module.exports = MainQuizContainer;
+module.exports = MainExamContainer;
